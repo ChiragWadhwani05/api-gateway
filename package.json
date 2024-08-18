@@ -1,0 +1,33 @@
+{
+  "name": "api-gateway",
+  "version": "0.0.0",
+  "description": "An API Gateway providing a unified entry point to microservices with routing, authentication, and rate limiting.",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "format": "prettier . --write"
+  },
+  "author": "Team Kratos",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "envalid": "^8.0.0",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "http-proxy-middleware": "^3.0.0",
+    "ioredis": "^5.4.1",
+    "rate-limit-redis": "^4.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "nodemon": "^3.1.4",
+    "prettier": "3.3.3"
+  }
+}
