@@ -16,8 +16,7 @@ function routeCheckMiddleware(allowedRoutes) {
       normalizedPath = req.path.slice(1);
     }
 
-    console.log(normalizedPath);
-    const routeKey = `${normalizedPath}:${req.method}`;
+    const routeKey = `/${normalizedPath}:${req.method}`;
 
     if (allowedRoutes.has(routeKey)) {
       return next();

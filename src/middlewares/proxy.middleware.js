@@ -28,7 +28,7 @@ function proxyMiddleware(serviceName, version = "v1", suffix = "") {
       changeOrigin: true,
       on: {
         error(err) {
-          console.error(err);
+          console.error("Proxy error:", err);
           next(new ApiError(500));
         },
       },
