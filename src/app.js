@@ -10,6 +10,7 @@ import { asyncHandler } from "./utils/asyncHandler.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
 import { createRouter } from "./routes/index.js";
 import helmet from "helmet";
+import cookieParser from "cookie-parser";
 
 function startApp() {
   const app = express();
@@ -19,6 +20,8 @@ function startApp() {
 
   // Set security HTTP headers
   app.use(helmet());
+
+  app.use(cookieParser());
 
   // CORS settings
   app.use(
