@@ -8,14 +8,13 @@ const verifyToken = asyncHandler(async (req, res, next) => {
     const token =
       req.cookies?.accessToken || req.headers?.authorization?.split(" ")[1];
 
-    console.log("token", token);
     if (!token) {
-      throw new ApiError(401, "Unauthorized");
+      throw new ApiError(401, "No Authorization token found");
     }
+
     const decodedToken = jwt.verify(token, env.ACCESS_TOKEN_SECRET);
 
-    console.log("token", decodedToken);
-    req.headers["userid"] = decodedToken._id;
+    req.headers["user-id"] = decodedToken._id;
     next();
   } catch (error) {
     throw new ApiError(401, error.message);
