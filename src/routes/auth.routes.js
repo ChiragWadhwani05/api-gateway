@@ -8,18 +8,18 @@ function createAuthV1Router() {
   router.use(
     routeCheckMiddleware(
       new Set([
-        "/register/check-availability:GET",
-        "/register/send-verification-email:POST",
-        "/register/verify-and-create:POST",
-        "/login:POST",
-        "/logout:POST",
-        "/tokens:POST",
-        "/tokens/access-token:POST",
-        "/google:GET",
-        "/google/callback:GET",
-        "/password/forgot:POST",
-        "/password/reset:POST",
-        "/password/change:POST",
+        "/register/check-availability|GET",
+        "/register/send-verification-email|POST",
+        "/register/verify-and-create|POST",
+        "/login|POST",
+        "/logout|POST",
+        "/tokens|POST",
+        "/tokens/access-token|POST",
+        "/google|GET",
+        "/google/callback|GET",
+        "/password/forgot|POST",
+        "/password/reset|POST",
+        "/password/change|POST",
       ])
     )
   );

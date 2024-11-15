@@ -16,10 +16,22 @@ function routeCheckMiddleware(allowedRoutes) {
       normalizedPath = req.path.slice(1);
     }
 
-    const routeKey = `/${normalizedPath}:${req.method}`;
+    const routeKey = `/${normalizedPath}|${req.method}`;
 
     if (allowedRoutes.has(routeKey)) {
       return next();
+    }
+
+    for (let allowedRoute of allowedRoutes) {
+      const [path, method] = allowedRoute.split("|");
+
+      const regexPath = path.replace(/:\w+/g, "([^/]+)");
+
+      const regex = new RegExp(`^${regexPath}$`);
+
+      if (method === req.method && regex.test(`/${normalizedPath}`)) {
+        return next();
+      }
     }
 
     next(new ApiError(404, "Endpoint not found"));

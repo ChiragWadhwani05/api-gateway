@@ -40,7 +40,7 @@ function startApp() {
   );
   const limiter = rateLimit({
     windowMs: 1000 * 60 * 1,
-    max: 10,
+    max: 100,
     message: { ...limiterResponse, message: limiterResponse.message },
     legacyHeaders: false,
     standardHeaders: true,
