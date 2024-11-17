@@ -11,7 +11,7 @@ function createUserV1Router() {
 
   router.use(
     routeCheckMiddleware(
-      new Set(["/self|GET", "/:username|GET", "/health|GET"])
+      new Set(["/self|GET", "/:username|GET", "/health|GET", "/|GET"])
     )
   );
 
@@ -19,6 +19,7 @@ function createUserV1Router() {
 
   router.route("/self").get();
   router.route("/:username").get();
+  router.route("/").get();
 
   router.use(proxyMiddleware("userService", "v1", "users"));
   return router;
