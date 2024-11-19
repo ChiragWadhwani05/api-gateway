@@ -23,21 +23,25 @@ async function startServer() {
  * @param {import('http').Server} server
  */
 function shutdown(server) {
-  process.on("SIGTERM", () => {
-    server.close(async () => {
-      console.log("HTTP server closed.");
-      await redisClient.disconnect();
-      process.exit(0);
+  if (process.listenerCount("SIGTERM") === 0) {
+    process.on("SIGTERM", () => {
+      server.close(async () => {
+        console.log("HTTP server closed.");
+        await redisClient.disconnect();
+        process.exit(0);
+      });
     });
-  });
+  }
 
-  process.on("SIGINT", () => {
-    server.close(async () => {
-      console.log("HTTP server closed.");
-      await redisClient.disconnect();
-      process.exit(0);
+  if (process.listenerCount("SIGINT") === 0) {
+    process.on("SIGINT", () => {
+      server.close(async () => {
+        console.log("HTTP server closed.");
+        await redisClient.disconnect();
+        process.exit(0);
+      });
     });
-  });
+  }
 }
 
 (async () => {

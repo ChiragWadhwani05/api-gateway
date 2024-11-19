@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { proxyMiddleware } from "../middlewares/proxy.middleware.js";
 import { routeCheckMiddleware } from "../middlewares/routeCheck.middleware.js";
+import { verifyToken } from "../middlewares/authenticate.middleware.js";
 
 function createAuthV1Router() {
   const router = Router();
@@ -20,6 +21,9 @@ function createAuthV1Router() {
         "/password/forgot|POST",
         "/password/reset|POST",
         "/password/change|POST",
+        "/update/username|PATCH",
+        "/update/send-verification-email|POST",
+        "/update/email|PATCH",
       ])
     )
   );
@@ -29,6 +33,10 @@ function createAuthV1Router() {
   router.route("/register/verify-and-create").post();
   router.route("/login").post();
   router.route("/logout").post();
+
+  router.route("/update/username").patch(verifyToken);
+  router.route("/update/send-verification-email").post(verifyToken);
+  router.route("/update/email").patch(verifyToken);
 
   router.route("/tokens").post();
   router.route("/tokens/access-token").post();
